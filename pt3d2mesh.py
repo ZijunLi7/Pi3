@@ -199,6 +199,7 @@ class TSDFMeshExtrator:
         os.makedirs(os.path.dirname(path), exist_ok=True)
         mesh = self._volume.extract_triangle_mesh()
         o3d.io.write_triangle_mesh(path, mesh)
+        return mesh
 
 
 def parse_args():
@@ -209,7 +210,7 @@ def parse_args():
                        help='Output directory')
     parser.add_argument('--mesh_name', type=str, default='pt3d2mesh.ply',
                        help='Output mesh filename')
-    parser.add_argument('--depth_trunc', type=float, default=None,
+    parser.add_argument('--depth_trunc', type=float, default=0.99,
                        help='Depth truncation value (auto-computed if not set)')
     parser.add_argument('--voxel_length', type=float, default=0.01,
                        help='Voxel length for TSDF volume')
@@ -347,7 +348,7 @@ def main():
     
     # Save mesh
     mesh_path = os.path.join(args.output_dir, args.mesh_name)
-    mesh_extractor.extract_and_save(mesh_path)
+    mesh = mesh_extractor.extract_and_save(mesh_path)
     print(f"\n✅ Mesh saved to {mesh_path}")
 
 

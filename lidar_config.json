@@ -9,7 +9,7 @@
     "horizontal": {
         "fov_start": 0.0,
         "fov_end": 360.0,
-        "resolution": 0.08
+        "resolution": 0.173
     },
     "units": "degrees"
 }
